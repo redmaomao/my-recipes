@@ -285,24 +285,153 @@
         .overlay{position:static;display:none}
         body{background:#fff}
       }
+
+      /* ================= App 式外壳（改版） ================= */
+      html,body{height:100%}
+      body{
+        background:#d8e0d5;
+        background-image:radial-gradient(circle at 18% 12%, rgba(31,92,70,.20), transparent 42%),radial-gradient(circle at 84% 88%, rgba(207,69,38,.12), transparent 40%);
+        overflow:hidden;
+      }
+      @media (prefers-color-scheme: dark){
+        body{background:#0b0f0c;background-image:radial-gradient(circle at 18% 12%, rgba(61,154,116,.16), transparent 42%),radial-gradient(circle at 84% 88%, rgba(232,112,79,.10), transparent 40%)}
+      }
+      .app-shell{
+        position:relative;max-width:480px;margin:0 auto;height:100dvh;
+        display:flex;flex-direction:column;background:var(--bg);color:var(--ink);
+        box-shadow:0 0 0 1px rgba(23,50,38,.12), 0 24px 70px rgba(10,25,17,.35);
+      }
+      @media (min-width:560px){
+        .app-shell{height:100dvh}
+      }
+      /* 顶栏 */
+      .app-bar{
+        flex:none;display:flex;align-items:center;gap:10px;
+        padding:calc(10px + env(safe-area-inset-top)) 16px 10px;
+        background:var(--green-deep);color:#f2f5f0;z-index:30;
+      }
+      .bar-back{width:36px;height:36px;flex:none;border-radius:50%;background:rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;color:#fff}
+      .bar-back svg{width:19px;height:19px}
+      .bar-back[hidden]{display:none}
+      .bar-titles{flex:1;min-width:0}
+      .bar-appname{font-size:11.5px;letter-spacing:.22em;color:#a9c6b4;font-weight:600}
+      .bar-title{font-size:19px;font-weight:900;margin:0;line-height:1.25;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+      .bar-date{font-size:12px;color:#bcd2c4;text-align:right;line-height:1.45;max-width:118px}
+      /* 内容区与页面 */
+      .app-main{flex:1;position:relative;overflow:hidden;min-height:0}
+      .page{
+        position:absolute;inset:0;overflow-y:auto;-webkit-overflow-scrolling:touch;
+        padding:16px 16px 28px;overscroll-behavior:contain;
+      }
+      .page[hidden]{display:none}
+      .page-intro{color:var(--ink-2);font-size:14px;margin:2px 0 14px}
+      /* 抽菜区在 App 内的排版 */
+      .picker{border-radius:18px;padding:20px 18px 18px}
+      .picker h2{font-size:22px}
+      .picker-main{flex-direction:column;gap:14px}
+      .picker-result{flex-direction:row;align-items:center}
+      .picker-result .p-img{width:92px;height:92px}
+      .p-name{font-size:24px}
+      .picker-side{flex-direction:column;min-width:0}
+      .picker-side .btn-draw{width:100%}
+      .picker-side .btn{justify-content:center}
+      .fav-toggle{justify-content:flex-start;padding:4px 2px}
+      /* 首页今日已定 */
+      .home-menu-card{margin-top:16px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 16px;box-shadow:var(--shadow-sm)}
+      .hmc-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+      .hmc-head h3{margin:0;font-size:17px;font-weight:900}
+      .hmc-link{color:var(--green);font-weight:700;font-size:14px;padding:4px 2px}
+      .hmc-list{margin-top:8px;display:grid;grid-template-columns:1fr 1fr;gap:8px 14px}
+      .hmc-item{font-size:14px;display:flex;gap:8px;align-items:baseline;min-width:0}
+      .hmc-item .hmc-meal{color:var(--ink-3);font-size:12.5px;font-weight:700;flex:none}
+      .hmc-item .hmc-name{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+      .hmc-item.none .hmc-name{color:var(--ink-3);font-weight:400}
+      /* 菜谱页 */
+      .lib-head{margin-top:2px}
+      .grid{grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px}
+      .card .c-img,.card .c-img-ph{height:112px}
+      .card-body{padding:11px 12px 13px;gap:6px}
+      .card-name{font-size:16.5px}
+      .card-meta{flex-wrap:wrap;gap:6px 10px}
+      .toolbar{margin-top:12px}
+      .chips{flex-wrap:wrap}
+      /* 今日菜单页 */
+      .menu-band{margin-top:0}
+      .menu-band h2{display:none}
+      .menu-grid{grid-template-columns:repeat(2,1fr);margin-top:2px}
+      .menu-slot{min-height:104px}
+      /* 我的页 */
+      .mine-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+      .mine-stat{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 8px;text-align:center;box-shadow:var(--shadow-sm)}
+      .mine-stat .num{font-family:"Noto Serif SC",serif;font-size:24px;font-weight:900;color:var(--green);line-height:1.2}
+      .mine-stat .lbl{font-size:12.5px;color:var(--ink-3);font-weight:600;margin-top:2px}
+      .backup{margin-top:0;flex-direction:column;align-items:stretch}
+      .backup .b-btns .btn{flex:1;justify-content:center}
+      .mine-note{margin-top:16px;color:var(--ink-3);font-size:13px;text-align:center}
+      /* 详情页 */
+      .detail-page{position:absolute;inset:0;z-index:20;background:var(--bg);overflow-y:auto;-webkit-overflow-scrolling:touch}
+      .detail-page[hidden]{display:none}
+      .detail-inner{padding:16px 16px 32px}
+      .detail-img{height:210px}
+      /* 底部导航 */
+      .tabbar{
+        flex:none;display:flex;background:var(--surface);border-top:1px solid var(--line);
+        padding:6px 6px calc(6px + env(safe-area-inset-bottom));z-index:30;
+      }
+      .tab{
+        flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;
+        padding:6px 0 4px;border-radius:12px;color:var(--ink-3);font-size:12px;font-weight:600;
+        -webkit-tap-highlight-color:transparent;
+      }
+      .tab svg{width:23px;height:23px}
+      .tab[aria-current="page"]{color:var(--red)}
+      .tab[aria-current="page"] svg{stroke-width:2.3}
+      .tab:active{background:var(--surface-2)}
+      /* 悬浮录入按钮 */
+      .fab{
+        position:absolute;right:18px;bottom:calc(76px + env(safe-area-inset-bottom));z-index:25;
+        width:56px;height:56px;border-radius:50%;background:var(--red);color:#fff;
+        display:flex;align-items:center;justify-content:center;box-shadow:0 10px 24px rgba(160,50,25,.42);
+      }
+      .fab svg{width:26px;height:26px}
+      .fab[hidden]{display:none}
+      .fab:active{transform:scale(.94)}
+      /* 弹层贴合 App 宽度 */
+      .overlay{inset:0}
+      .sheet{max-width:480px}
+      .confirm-sheet{max-width:420px}
+      .toast{bottom:calc(92px + env(safe-area-inset-bottom));z-index:99}
+      @media (max-width:400px){
+        .grid{grid-template-columns:repeat(2,1fr);gap:10px}
+        .card .c-img,.card .c-img-ph{height:96px}
+        .picker-result .p-img{width:76px;height:76px}
+        .bar-date{display:none}
+      }
+      @media print{
+        body{overflow:visible;background:#fff}
+        .app-shell{max-width:none;height:auto;box-shadow:none}
+        .tabbar,.fab,.app-bar{display:none !important}
+        .page{position:static;overflow:visible}
+      }
     </style>
   </head>
   <body>
-    <div class="wrap">
-      <!-- 页头 -->
-      <header class="topbar">
-        <div>
-          <h1>我的菜谱</h1>
-          <div class="date-line" id="dateLine">今天吃什么，抽一道就定下来。</div>
+    <div class="app-shell">
+      <!-- App 顶栏 -->
+      <header class="app-bar">
+        <button class="bar-back" id="headerBack" type="button" aria-label="返回" hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+        </button>
+        <div class="bar-titles">
+          <div class="bar-appname">我的菜谱</div>
+          <h1 class="bar-title" id="pageTitle">首页 · 抽菜</h1>
         </div>
-        <div class="top-actions">
-          <button class="btn btn-primary" id="btnAddTop" type="button">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
-            录入新菜谱
-          </button>
-        </div>
+        <div class="bar-date" id="dateLine"></div>
       </header>
 
+      <main class="app-main" id="appMain">
+        <!-- 页面：首页 / 抽菜 -->
+        <section class="page" id="page-home" data-page="home" aria-label="首页抽菜">
       <!-- 选菜区 -->
       <section class="picker" aria-label="选菜决定今天吃什么">
         <h2>今天吃什么？</h2>
@@ -332,21 +461,14 @@
           </div>
         </div>
       </section>
-
-      <!-- 今日菜单 -->
-      <section class="menu-band" aria-label="今日菜单">
-        <h2>今日菜单</h2>
-        <div class="menu-grid" id="menuGrid"></div>
-        <div class="menu-tools">
-          <button class="btn btn-sm" id="btnShopList" type="button" disabled>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h15l-1.5 9h-12z"/><path d="M6 7L5 3H2"/><circle cx="9" cy="20" r="1.6"/><circle cx="18" cy="20" r="1.6"/></svg>
-            汇总今日食材
-          </button>
-          <button class="btn btn-sm btn-ghost" id="btnClearMenu" type="button" disabled>清空菜单</button>
-          <span class="note" id="menuNote"></span>
+        <div class="home-menu-card">
+          <div class="hmc-head"><h3>今日已定</h3><button type="button" class="hmc-link" id="btnGoMenu">查看今日菜单 ›</button></div>
+          <div class="hmc-list" id="homeMenuPreview"></div>
         </div>
-      </section>
+        </section>
 
+        <!-- 页面：菜谱 -->
+        <section class="page" id="page-recipes" data-page="recipes" aria-label="菜谱" hidden>
       <!-- 菜谱库 -->
       <section aria-label="菜谱库">
         <div class="lib-head">
@@ -366,7 +488,29 @@
         <div class="grid" id="recipeGrid"></div>
         <div id="emptyBox"></div>
       </section>
+        </section>
 
+        <!-- 页面：今日菜单 -->
+        <section class="page" id="page-menu" data-page="menu" aria-label="今日菜单页" hidden>
+      <!-- 今日菜单 -->
+      <section class="menu-band" aria-label="今日菜单">
+        <p class="page-intro">这里是你定下来的四餐。在抽菜页点「就吃这道」，或在菜谱详情里选一餐，就会出现在这里。</p>
+        <div class="menu-grid" id="menuGrid"></div>
+        <div class="menu-tools">
+          <button class="btn btn-sm" id="btnShopList" type="button" disabled>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h15l-1.5 9h-12z"/><path d="M6 7L5 3H2"/><circle cx="9" cy="20" r="1.6"/><circle cx="18" cy="20" r="1.6"/></svg>
+            汇总今日食材
+          </button>
+          <button class="btn btn-sm btn-ghost" id="btnClearMenu" type="button" disabled>清空菜单</button>
+          <span class="note" id="menuNote"></span>
+        </div>
+      </section>
+        </section>
+
+        <!-- 页面：我的 / 设置 -->
+        <section class="page" id="page-mine" data-page="mine" aria-label="我的与设置" hidden>
+          <p class="page-intro">菜谱数据、备份恢复都在这里。</p>
+          <div class="mine-stats" id="mineStats"></div>
       <!-- 备份 -->
       <section class="backup" aria-label="备份菜谱">
         <div class="b-text">
@@ -386,12 +530,39 @@
         </div>
       </section>
 
-      <footer>示例菜谱可以随意改、随意删，换成你自己的拿手菜。</footer>
-    </div>
+          <div class="mine-note">示例菜谱可以随意改、随意删，换成你自己的拿手菜。</div>
+        </section>
 
-    <!-- 详情弹层 -->
-    <div class="overlay" id="detailOverlay" role="dialog" aria-modal="true" aria-label="菜谱详情">
-      <div class="sheet" id="detailSheet"></div>
+        <!-- 菜谱详情（独立页，盖在当前页面上，返回后回到原页面） -->
+        <div class="detail-page" id="detailOverlay" role="dialog" aria-modal="true" aria-label="菜谱详情" hidden>
+          <div class="detail-inner" id="detailSheet"></div>
+        </div>
+      </main>
+
+      <!-- 录入悬浮按钮（仅菜谱页） -->
+      <button class="fab" id="btnFab" type="button" aria-label="录入新菜谱" hidden>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+      </button>
+
+      <!-- 底部导航 -->
+      <nav class="tabbar" aria-label="主导航">
+        <button type="button" class="tab" data-nav="home" aria-current="page">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9.5 21v-6h5v6"/></svg>
+          <span>首页</span>
+        </button>
+        <button type="button" class="tab" data-nav="recipes">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4H6.5A2.5 2.5 0 0 0 4 6.5v13Z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>
+          <span>菜谱</span>
+        </button>
+        <button type="button" class="tab" data-nav="menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/><circle cx="19" cy="18" r="2.2"/></svg>
+          <span>今日菜单</span>
+        </button>
+        <button type="button" class="tab" data-nav="mine">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 5-5.5 8-5.5s6.5 1.5 8 5.5"/></svg>
+          <span>我的</span>
+        </button>
+      </nav>
     </div>
 
     <!-- 录入 / 编辑弹层 -->
@@ -655,11 +826,59 @@ var ICON_USER = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stro
 var ICON_HEART = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 20.5C7 16.5 3 13.2 3 9.3 3 6.4 5.2 4.5 7.7 4.5c1.7 0 3.4 1 4.3 2.4.9-1.4 2.6-2.4 4.3-2.4 2.5 0 4.7 1.9 4.7 4.8 0 3.9-4 7.2-9 11.2Z"/></svg>';
 var ICON_BOOK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="width:44px;height:44px"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4H6.5A2.5 2.5 0 0 0 4 6.5v13Z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>';
 
+
+/* ============ App 页面切换 ============ */
+var currentPage = 'home';
+var pageScrollTops = { home:0, recipes:0, menu:0, mine:0 };
+var PAGE_TITLES = { home:'首页 · 抽菜', recipes:'菜谱', menu:'今日菜单', mine:'我的 · 设置' };
+var detailOpenFlag = false;
+function pageEl(name){ return document.querySelector('.page[data-page="' + name + '"]'); }
+function showPage(name, keepDetail){
+  if (!pageEl(name)) name = 'home';
+  var cur = pageEl(currentPage);
+  if (cur) pageScrollTops[currentPage] = cur.scrollTop;
+  if (!keepDetail && detailOpenFlag) closeDetail();
+  currentPage = name;
+  ['home','recipes','menu','mine'].forEach(function(k){
+    var el = pageEl(k);
+    if (el) el.hidden = (k !== name);
+  });
+  var target = pageEl(name);
+  if (target) target.scrollTop = pageScrollTops[name] || 0;
+  var tabs = document.querySelectorAll('.tab[data-nav]');
+  for (var i=0;i<tabs.length;i++){
+    if (tabs[i].getAttribute('data-nav') === name) tabs[i].setAttribute('aria-current','page');
+    else tabs[i].removeAttribute('aria-current');
+  }
+  if (!detailOpenFlag) $('pageTitle').textContent = PAGE_TITLES[name];
+  $('btnFab').hidden = !(name === 'recipes' && !detailOpenFlag);
+  if (name === 'mine') renderMineStats();
+  if (name === 'home') renderHomePreview();
+}
+function renderHomePreview(){
+  var box = $('homeMenuPreview');
+  if (!box) return;
+  box.innerHTML = MEALS.map(function(m){
+    var r = menu[m.key]? byId(menu[m.key]): null;
+    return '<div class="hmc-item' + (r? '': ' none') + '"><span class="hmc-meal">' + m.label + '</span><span class="hmc-name">' + (r? esc(r.name): '还没定') + '</span></div>';
+  }).join('');
+}
+function renderMineStats(){
+  var box = $('mineStats');
+  if (!box) return;
+  var favs = recipes.filter(function(r){ return r.fav;}).length;
+  var filled = MEALS.filter(function(m){ return menu[m.key] && byId(menu[m.key]);}).length;
+  box.innerHTML =
+    '<div class="mine-stat"><div class="num">' + recipes.length + '</div><div class="lbl">菜谱总数</div></div>'
+    + '<div class="mine-stat"><div class="num">' + favs + '</div><div class="lbl">收藏的菜</div></div>'
+    + '<div class="mine-stat"><div class="num">' + filled + ' / 4</div><div class="lbl">今日已定</div></div>';
+}
+
 /* ============ 日期行 ============ */
 function renderDate(){
 var d = new Date();
 var wk = ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'][d.getDay()];
-$('dateLine').textContent = (d.getMonth()+1) + '月' + d.getDate() + '日 ' + wk + ' · 今天吃什么，抽一道就定下来。';
+$('dateLine').textContent = (d.getMonth()+1) + '月' + d.getDate() + '日 ' + wk;
 }
 
 /* ============ 选菜区 ============ */
@@ -818,6 +1037,8 @@ toast('已清空这一餐');
 $('btnShopList').disabled = filledCount === 0;
 $('btnClearMenu').disabled = filledCount === 0;
 $('menuNote').textContent = filledCount === 0? '抽中菜点「就吃这道」，或在菜谱详情里直接定。': '已定 ' + filledCount + ' 餐';
+renderHomePreview();
+if (currentPage === 'mine') renderMineStats();
 }
 function setMenuDish(mealKey, recipeId){
 menu[mealKey] = recipeId;
@@ -933,7 +1154,7 @@ if (!r) return;
 r.fav =!r.fav;
 persistState();
 renderGrid();
-if (detailId === id && $('detailOverlay').classList.contains('open')) renderDetail();
+if (detailId === id && detailOpenFlag) renderDetail();
 toast(r.fav? '已收藏「' + r.name + '」': '已取消收藏');
 }
 
@@ -943,13 +1164,24 @@ if (!byId(id)) return;
 detailId = id;
 detailAssignMeal = pickerMeal;
 renderDetail();
-$('detailOverlay').classList.add('open');
-document.body.style.overflow = 'hidden';
+detailOpenFlag = true;
+var ov = $('detailOverlay');
+ov.classList.add('open');
+ov.hidden = false;
+ov.scrollTop = 0;
+$('pageTitle').textContent = '菜谱详情';
+$('headerBack').hidden = false;
+$('btnFab').hidden = true;
 }
 function closeDetail(){
-$('detailOverlay').classList.remove('open');
-document.body.style.overflow = '';
+var ov = $('detailOverlay');
+ov.classList.remove('open');
+ov.hidden = true;
+detailOpenFlag = false;
 detailId = null;
+$('pageTitle').textContent = PAGE_TITLES[currentPage];
+$('headerBack').hidden = true;
+$('btnFab').hidden = !(currentPage === 'recipes');
 }
 function renderDetail(){
 var r = byId(detailId);
@@ -1135,6 +1367,7 @@ data.sample = false;
 recipes.unshift(data);
 persistState();
 closeForm();
+showPage('recipes');
 renderGrid(); renderPickerIdle();
 toast('已录入「' + data.name + '」');
 }
@@ -1308,7 +1541,15 @@ $('searchInput').addEventListener('input', function(){
 filterQ = this.value;
 renderGrid();
 });
-$('btnAddTop').addEventListener('click', function(){ openForm(null);});
+var tabsAll = document.querySelectorAll('.tab[data-nav]');
+for (var ti=0; ti<tabsAll.length; ti++){
+  tabsAll[ti].addEventListener('click', function(){ showPage(this.getAttribute('data-nav')); });
+}
+$('headerBack').addEventListener('click', function(){ closeDetail(); });
+$('btnFab').addEventListener('click', function(){ openForm(null); });
+$('btnGoMenu').addEventListener('click', function(){ showPage('menu'); });
+var legacyAddTop = $('btnAddTop');
+if (legacyAddTop) legacyAddTop.addEventListener('click', function(){ openForm(null); });
 $('btnAdd2').addEventListener('click', function(){ openForm(null);});
 $('formClose').addEventListener('click', closeForm);
 $('formCancel').addEventListener('click', closeForm);
@@ -1325,7 +1566,7 @@ $('confirmOverlay').classList.remove('open');
 pendingDeleteId = null;
 });
 $('confirmOk').addEventListener('click', doDelete);
-$('detailOverlay').addEventListener('click', function(e){ if (e.target === this) closeDetail();});
+/* 详情为独立页，通过顶栏返回按钮关闭 */
 $('formOverlay').addEventListener('click', function(e){ if (e.target === this) closeForm();});
 $('shopOverlay').addEventListener('click', function(e){ if (e.target === this) closeShop();});
 $('confirmOverlay').addEventListener('click', function(e){
@@ -1350,6 +1591,7 @@ renderGrid();
 renderMenu();
 renderPickerIdle();
 bindEvents();
+showPage('home');
 })();
 </script>
 </body>
